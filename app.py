@@ -15,7 +15,7 @@ else:
                 ([Date] date,[Activity] text)''')
 
 def top_menu():
-    choice = input("Enter a selection.\n\n[1] - Start Timer\n[2] - View Entries\n[3] - Clear Entries\n[4] - Quit\n\n> ")
+    choice = input("\nEnter a selection.\n\n[1] - Start Timer\n[2] - View Entries\n[3] - Clear Entries\n[4] - Quit\n\n> ")
     if choice == "1":
         configure_timer()
     if choice == "2":
@@ -31,8 +31,8 @@ def top_menu():
 
 def configure_timer():
     interval = int(input("How often to prompt? Press Enter to accept default of once every 20 minutes.\n\n[20] >") or "20")
-    duration = int(input("For how many hours do you want to do this to yourself?  Press Enter to accept default of 2 hours. \n\n[2] >") or "2")
-    print(f"Prompting every { interval } minutes for { duration } hours.")
+    duration = int(input("\nFor how many hours do you want to do this to yourself?  Press Enter to accept default of 2 hours. \n\n[2] >") or "2")
+    print(f"\nPrompting every { interval } minutes for { duration } hours.\n")
     run_timer(duration, interval)
 
 def run_timer(duration, interval):
@@ -85,7 +85,6 @@ def update_entries(conn, status_update):
     cur = conn.cursor()
     cur.execute(sql, status_update)
     conn.commit()
-    return cur.lastrowid
 
 if __name__ == '__main__':
     top_menu()
