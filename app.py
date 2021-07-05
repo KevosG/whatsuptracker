@@ -40,21 +40,21 @@ def run_timer(duration, interval):
     stop_time = datetime.now() + timedelta(hours=duration)
     while datetime.now() < stop_time:
         with conn:
-            status_update = get_status()
+            status_update = get_status(interval)
             update_entries(conn, status_update)
         entries = get_posts()
         for row in entries:
             print(row)
         time.sleep(interval * 60)
 
-def get_status():
+def get_status(interval):
     now = datetime.now()
     formatted_now = now.strftime("%m/%d/%Y, %H:%M")
     try:
         beepy.beep(sound = "coin")
     except:
         pass
-    update = input("What have you been doing for the last 20 minutes?\n\n> ")
+    update = input(f"What have you been doing for the last {interval} minutes?\n\n> ")
     status_update = (formatted_now, update)
     return status_update
 
