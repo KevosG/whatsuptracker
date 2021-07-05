@@ -1,0 +1,10 @@
+astroid==2.6.2
+beepy==1.0.7
+isort==5.9.1
+lazy-object-proxy==1.6.0
+mccabe==0.6.1
+pathlib==1.0.1
+pylint==2.9.3
+simpleaudio==1.0.4
+toml==0.10.2
+wrapt==1.12.1
