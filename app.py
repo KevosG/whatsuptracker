@@ -30,8 +30,8 @@ def top_menu():
         quit()
 
 def configure_timer():
-    interval = int(input("How often to prompt? Press Enter to accept default of once every 20 minutes.\n\n[20] >") or "20")
-    duration = int(input("\nFor how many hours do you want to do this to yourself?  Press Enter to accept default of 2 hours. \n\n[2] >") or "2")
+    interval = int(input("How often to prompt? Press Enter to accept default of once every 20 minutes.\n\n[20] > ") or "20")
+    duration = int(input("\nFor how many hours do you want to do this to yourself?  Press Enter to accept default of 2 hours. \n\n[2] > ") or "2")
     print(f"\nPrompting every { interval } minutes for { duration } hours.\n")
     run_timer(duration, interval)
 
@@ -68,16 +68,18 @@ def create_connection(db_file):
 
 def get_posts():
     conn = create_connection(database)
-    cur = conn.cursor()
-    cur.execute('select * from entries')
-    posts = cur.fetchall()
+    with conn:
+        cur = conn.cursor()
+        cur.execute('select * from entries')
+        posts = cur.fetchall()
     return posts
 
 def clear_posts():
     conn = create_connection(database)
-    cur = conn.cursor()
-    cur.execute('DELETE FROM entries')
-    conn.commit()
+    with conn:
+        cur = conn.cursor()
+        cur.execute('DELETE FROM entries')
+        conn.commit()
 
 def update_entries(conn, status_update):
     sql = ''' INSERT INTO entries(date,activity)
